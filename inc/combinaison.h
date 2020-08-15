@@ -45,7 +45,6 @@
 		-> deux constantes symboliques COULEUR_MIN et COULEUR_MAX représentant le plus petit et le plus grand code d'une "vraie" couleur du jeu 
 */
 
-#define NB_COULEURS 8
 
 enum e_couleur {
 	COULEUR_INDETERMINEE = 0,
@@ -60,7 +59,7 @@ enum e_couleur {
 };
 
 #define COULEUR_MIN (COULEUR_INDETERMINEE + 1)
-#define COULEUR_MAX (COULEUR_INDETERMINEE + NB_COULEURS)
+
 
 typedef enum e_couleur couleur ;
 

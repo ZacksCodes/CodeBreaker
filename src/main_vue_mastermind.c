@@ -1,4 +1,4 @@
-#include "../inc/vue_mastermind.h"
+#include "../inc/vue_mastermind10.h"
 #include <stdlib.h>
 #include <stdio.h>
 

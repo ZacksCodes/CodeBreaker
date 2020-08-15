@@ -3,7 +3,7 @@
 	Une fonction de classe 'static' est une fonction qui n'est visible (et donc, à laquelle on ne peut faire appel) que du fichier dans lequel elle est définie.
 */
 
-#include "../inc/mastermind.h"
+#include "../inc/mastermind10.h"
 
 #include <stdlib.h>  /* pour la fonction rand() */
 
