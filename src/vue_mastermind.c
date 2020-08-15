@@ -47,18 +47,18 @@ void initialiser_tabBouton(vue_master_t* m)
 	for(i = 0; i < NB_BOUTONS; i++)
 		m->tabBouton[i] = gtk_button_new();
 
-	for(i = 6; i < NB_BOUTONS; i+=7)
+	for(i = 4; i < NB_BOUTONS; i+=5)
     {
 		gtk_widget_set_sensitive(m->tabBouton[i], FALSE);
     }
 
-    for(i = 14; i < NB_BOUTONS; i++)
+    for(i = 50; i < NB_BOUTONS; i++)
     {
         gtk_widget_set_sensitive(m->tabBouton[i], FALSE);
         gtk_button_set_label(GTK_BUTTON(m->tabBouton[i]), "?");
         
     }
-	gtk_button_set_label(GTK_BUTTON(m->tabBouton[20]), "The Secret Code");
+	gtk_button_set_label(GTK_BUTTON(m->tabBouton[54]), "The Secret Code");
 }
 
 /**
@@ -73,7 +73,7 @@ void initialiser_table(vue_master_t* m)
 	int j;
 
 	m->table = gtk_table_new(NB_LIGNE, NB_COLONNE, TRUE);
-    gtk_table_set_col_spacing(GTK_TABLE(m->table), 5, 15);
+    gtk_table_set_col_spacing(GTK_TABLE(m->table), 3, 15);
     for(i = 0; i < NB_LIGNE; i++)
     {
         gtk_table_set_row_spacing(GTK_TABLE(m->table), i, 10);
@@ -187,7 +187,6 @@ void vue_mastermind(vue_master_t* m)
 
     initialiser_ensemble(m);
     initialiser_modele(m);
-
     /* dès qu'on click sur un bouton, on le modifie et on active confirmer si besoin. */
     for(i = 0; i < NB_BOUTONS; i++)
     {
@@ -199,6 +198,7 @@ void vue_mastermind(vue_master_t* m)
     g_signal_connect(G_OBJECT(m->window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
     g_signal_connect(G_OBJECT(m->confirm), "clicked", G_CALLBACK(confirmer), m);
     g_signal_connect(G_OBJECT(m->rejouer), "clicked", G_CALLBACK(replay_joueur), m);
+
 }
 
 /**
@@ -216,11 +216,11 @@ void modifier_bouton(GtkWidget* b, vue_master_t* m)
     int decal = 0;
     int cle;
     GtkWidget* image = NULL;
-
     for(i = 0; i < NB_BOUTONS; i++)
     {
         if(m->tabBouton[i] == b)
         {
+            
             /* il y a decalage puisque il y a des boutons inactifs. On le calcule ici.*/
             for(j = 1; j < NB_LIGNE; j++)
             {
@@ -232,7 +232,7 @@ void modifier_bouton(GtkWidget* b, vue_master_t* m)
                     break;
             }
             /* la cle est la case ou l'on veut stocker l'information (modèle). Donc pareil on calcule. */
-            cle = ((i - 1*decal) % 6) + 1;
+            cle = ((i - 1*decal) % 4) + 1;
             switch(m->couleur)
             {
                 case COULEUR_INDETERMINEE:
@@ -338,7 +338,7 @@ void confirmer(GtkWidget* b, vue_master_t* m)
         /* on concatène les informations recueullis */
         g_stpcpy(info, g_strconcat(g_strconcat(chaine1, chaine2, NULL), NULL));
         /* on change le label du bouton correspondant */
-        gtk_button_set_label(GTK_BUTTON(m->tabBouton[6*dernier_essai + 1*(dernier_essai - 1)]), info);
+        gtk_button_set_label(GTK_BUTTON(m->tabBouton[4*dernier_essai + 1*(dernier_essai - 1)]), info);
         /* on desactive confirmer */
         gtk_widget_set_sensitive(m->confirm, FALSE);
 
@@ -389,7 +389,7 @@ void activer_confirmer_if(GtkWidget* b, vue_master_t *m)
     }
 
     /* on active le bouton confirmer */
-    if(compteurTemp == 6)
+    if(compteurTemp == 4)
         gtk_widget_set_sensitive(m->confirm, TRUE);
 /*
 	#if(DEBUG == 1)
@@ -406,11 +406,11 @@ void afficher_combi_gagnant(vue_master_t* m)
 {
     int i;
     couleur c;
-    for(i = 1; i < 7; i++)
+    for(i = 1; i < 5; i++)
     {
         c = mastermind_get_secret(&m->mastermind, i);
         m->couleur = c;
-        modifier_bouton(m->tabBouton[13 + i], m);
+        modifier_bouton(m->tabBouton[49 + i], m);
     }
 }
 
@@ -522,13 +522,19 @@ void refresh(vue_master_t* m)
     {
         gtk_button_set_image(GTK_BUTTON(m->tabBouton[i]), NULL);
         gtk_button_set_label(GTK_BUTTON(m->tabBouton[i]), "");
-        if(i < 14)
+        if(i < 55)
             gtk_widget_set_sensitive(m->tabBouton[i], TRUE);
     }
 
-    for(i = 6; i < NB_BOUTONS; i+=7)
+    for(i = 4; i < NB_BOUTONS; i+=5)
         gtk_widget_set_sensitive(m->tabBouton[i], FALSE);
-
-    for(i = 14; i < NB_BOUTONS - 1; i++)
+    for(i = 50; i < NB_BOUTONS; i++)
+    {
+        gtk_widget_set_sensitive(m->tabBouton[i], FALSE);
         gtk_button_set_label(GTK_BUTTON(m->tabBouton[i]), "?");
+        
+    }
+    for(i = 50; i < NB_BOUTONS - 1; i++)
+        gtk_button_set_label(GTK_BUTTON(m->tabBouton[i]), "?");
+    gtk_button_set_label(GTK_BUTTON(m->tabBouton[54]), "The Secret Code");
 }

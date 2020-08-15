@@ -1,9 +1,3 @@
-/** vue_mastermind.h
-
-Par LE Richard, le seul et l'unique.
-
-*/
-
 #ifndef __VUE_MASTERMIND_H__
 #define __VUE_MASTERMIND_H__
 
@@ -15,6 +9,7 @@ Par LE Richard, le seul et l'unique.
 #include <string.h>
 #include <gtk/gtk.h>
 
+
 #define NB_COLONNE (TAILLE_COMBI + 1)
 #define NB_LIGNE (NB_ESSAIS + 1)
 #define NB_BOUTONS NB_COLONNE*NB_LIGNE
@@ -24,7 +19,7 @@ Par LE Richard, le seul et l'unique.
 #define SET_IMAGE gtk_button_set_image(GTK_BUTTON(b), image);
 
 #define MODE_JOUEUR 1
-#define MODE_ORDINATEUR 2
+
 
 struct vue_mastermind_s{
 	GtkWidget* window;

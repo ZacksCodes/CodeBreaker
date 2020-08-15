@@ -1,52 +1,3 @@
-/* Jeu de Mastermind : fichier d'entete
-
-	________________________ Le jeu :
-	Dans le jeu de mastermind, un joueur dispose de 12 tentatives pour deviner une combinaison de 4 couleurs consécutives.
-
-	Les étapes du jeu :
-	- Définir une combinaison secrète de 4 couleurs ;
-	- tant que le joueur n'a encore ni deviné la combinaison secrète, ni fait 12 propositions :
-		- le joueur propose une combinaison de 4 couleurs ;
-		- il est informé du nombre de couleurs de sa proposition (que l'on appelle aussi essai par la suite) qui coïncident avec celles de la combinaison secrète,
-			ainsi que du nombre de telles couleurs qui se trouvent à la même place dans la combinaison secrète.
-
-	________________________ Sont définis / déclarées ici :
-	Les constantes symboliques:
-		#define NB_ESSAIS 12
-
-	Les types :
-		typedef enum e_etat_partie etat_partie;
-		typedef struct s_mastermind mastermind ;
-
-	Les fonctions de manipulation :
-
-		Initialisation :
-			void mastermind_initialiser(mastermind* mm);
-			void mastermind_initialiser_avec_secret(mastermind* mm);
-
-		Définir une combinaison secrète :
-			void mastermind_set_secret(mastermind* mm, int cle, couleur val);
-			int mastermind_est_secret_valide(mastermind* mm);
-			void mastermind_valider_secret(mastermind* mm);
-
-		Proposer une combinaison (essai en cours) :
-			void mastermind_set_essai_encours(mastermind* mm, int cle, couleur val);
-			int mastermind_est_essai_encours_valide(mastermind* mm);
-			void mastermind_valider_essai_encours(mastermind* mm);
-
-		Accesseurs en lecture :
-			etat_partie mastermind_get_etat(mastermind* mm);
-			int mastermind_get_num_essai_encours(mastermind* mm);
-			int mastermind_get_num_dernier_essai(mastermind* mm);
-
-			couleur mastermind_get_secret(mastermind* mm, int cle);
-			couleur mastermind_get_essai_encours(mastermind* mm, int cle);
-			couleur mastermind_get_essai(mastermind* mm, int num, int cle);
-
-			int mastermind_get_nb_couleurs_correctes(mastermind* mm, int num);
-			int mastermind_get_nb_couleurs_placees(mastermind* mm, int num);
-*/
-
 #ifndef MASTERMIND_H
 
 #define MASTERMIND_H
@@ -78,7 +29,7 @@
 */
 
 /* Nombre d'essais */
-#define NB_ESSAIS 2
+#define NB_ESSAIS 10
 
 /* État du jeu
 	Le jeu peut se trouver dans 4 états distincts :

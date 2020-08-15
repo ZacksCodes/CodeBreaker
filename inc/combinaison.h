@@ -71,7 +71,7 @@ typedef enum e_couleur couleur ;
 		=> une combinaison peut être représentée par un tableau de TAILLE_COMBI couleurs
 */
 
-#define TAILLE_COMBI 6
+#define TAILLE_COMBI 4
 
 typedef couleur combinaison[TAILLE_COMBI];
 
