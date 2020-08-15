@@ -1,6 +1,6 @@
 #include "../inc/vue_mastermind.h"
 #include <glib.h>
-
+int nb = 6;
 /**
 	Initialise une fenêtre gtk.
 	La positionne au milieu de la fenêtre et lui donne comme nom "Le jeu du MasterMind".
@@ -170,7 +170,7 @@ void initialiser_ensemble(vue_master_t* m)
 void initialiser_modele(vue_master_t* m)
 {
     srand(time(NULL));
-    mastermind_initialiser_avec_secret(&m->mastermind);
+    mastermind_initialiser_avec_secret(&m->mastermind, nb);
 }
 
 

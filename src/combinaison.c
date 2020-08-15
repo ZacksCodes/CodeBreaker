@@ -6,6 +6,8 @@
 
 #include <stdlib.h>  /* pour la fonction rand() */
 
+
+int nb_max;
 /*	______________________________________
 	Intialisation						*/
 
@@ -24,14 +26,14 @@ void combinaison_initialiser(combinaison c)
 
 /* Cette fonction attribue aléatoirement une couleur dans {COULEUR_MIN ,..., COULEUR_MAX} à chaque composante d'une combinaison
 */
-void combinaison_tirer_au_hasard(combinaison c)
+void combinaison_tirer_au_hasard(combinaison c, int nb)
 {
 	int i;
-
+	nb_max = nb + COULEUR_INDETERMINEE;
     /* tirage au hasard de chaque composante de la combinaison */
     for (i = 0 ; i < TAILLE_COMBI ; i ++)
 	{
-        c[i] = (rand() % NB_COULEURS) + COULEUR_MIN;
+        c[i] = (rand() % nb_max) + COULEUR_MIN;
 		
 		g_print("%d ", c[i]);
 	}
@@ -75,7 +77,7 @@ int combinaison_est_valide(combinaison c)
     /* on recherche dans la combinaison une valeur à l'extérieur de l'intervalle [COULEUR_MIN, COULEUR_MAX] */
     for (i = 0 ; (i < TAILLE_COMBI) && (res == 1) ; i ++)
 	{
-        res = (c[i] >= COULEUR_MIN) && (c[i] <= COULEUR_MAX) ;
+        res = (c[i] >= COULEUR_MIN) && (c[i] <= nb_max) ;
 	}
 
 	/* on retourne le résultat */
@@ -118,7 +120,7 @@ int combinaison_cmp_ensembliste(combinaison c_source, combinaison c_cible)
     /* Dénombrement du nombre d'occurrences de chaque couleur dans les tableaux c_source et c_cible :
 		- seulent nous intéressent les couleurs COULEUR_MIN ,..., COULEUR_MAX
 		- on sort de la boucle dès lors que les cases de c_source, ou celles de c_cible, ont toutes été déjà dénombrées  */
-    for (coul = COULEUR_MIN ; (coul <= COULEUR_MAX) && (nb_source < TAILLE_COMBI) && (nb_cible < TAILLE_COMBI) ; coul ++)
+    for (coul = COULEUR_MIN ; (coul <= nb_max) && (nb_source < TAILLE_COMBI) && (nb_cible < TAILLE_COMBI) ; coul ++)
 	{
     		/* dénombrement du nombre d'occurrences de la couleur coul dans les tableaux c_source et c_cible */
 		nb_occ_source = 0;

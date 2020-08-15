@@ -88,7 +88,7 @@ void combinaison_initialiser(combinaison c);
 	- c est bien un tableau de TAILLE_COMBI variables de type couleur;
 	- pour obtenir des générations aléatoires d'une exécution à l'autre, la graine aléatoire doit avoir été préalablement initialisée par appel à srand()
 */
-void combinaison_tirer_au_hasard(combinaison c);
+void combinaison_tirer_au_hasard(combinaison c, int nb);
 
 /*	______________________________________
 	Accesseurs en lecture / écriture		*/

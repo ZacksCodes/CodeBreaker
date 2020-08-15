@@ -48,10 +48,10 @@ void mastermind_initialiser(mastermind* mm)
 /* Cette fonction lance une nouvelle partie de mastermind en affectant à chaque composante de la combinaison secrète une valeur tirée au hasard
 		dans {COULEUR_MIN ,..., COULEUR_MAX}
 */
-void mastermind_initialiser_avec_secret(mastermind* mm)
+void mastermind_initialiser_avec_secret(mastermind* mm, int nb)
 {
     /* mise a jour aléatoire de la combinaison secrete */
-	combinaison_tirer_au_hasard(mm->plateau[NB_ESSAIS]);
+	combinaison_tirer_au_hasard(mm->plateau[NB_ESSAIS], nb);
 
 	/* lancement de la partie */
 	mm->etat = ETAT_MM_SECRET;	/* pour un bon usage de la fonction mastermind_etape_suivante(); */

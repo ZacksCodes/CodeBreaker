@@ -85,7 +85,7 @@ void mastermind_initialiser(mastermind* mm);
 	- l'état de la partie est ETAT_MM_ENCOURS
 	- le numéro d'essai en cours vaut 1, les composantes de cet essai valent toutes COULEUR_INDETERMINEE
 */
-void mastermind_initialiser_avec_secret(mastermind* mm);
+void mastermind_initialiser_avec_secret(mastermind* mm, int nb);
 
 /*	__________________________________________________
 	Définir une combinaison secrète					*/
