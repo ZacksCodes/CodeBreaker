@@ -1,4 +1,4 @@
-#include "../inc/vue_mastermind10.h"
+#include "../inc/vue_mastermind.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -76,6 +76,7 @@ void submit(GtkWidget* button, gpointer window)
     GtkSettings* default_settings = gtk_settings_get_default();
 	g_object_set(default_settings, "gtk-button-images", TRUE, NULL);
     gtk_widget_show_all(master.window);
+    gtk_main_quit();
 }
 
 void checkRadioBtn()

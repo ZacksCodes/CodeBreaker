@@ -1,7 +1,7 @@
 #ifndef __VUE_MASTERMIND_H__
 #define __VUE_MASTERMIND_H__
 
-#include "mastermind10.h"
+#include "mastermind.h"
 #include "stat-essai.h"
 #include "combinaison.h"
 #include <stdlib.h>

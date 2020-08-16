@@ -29,7 +29,7 @@
 */
 
 /* Nombre d'essais */
-#define NB_ESSAIS 10
+#define NB_ESSAIS 8
 
 /* État du jeu
 	Le jeu peut se trouver dans 4 états distincts :

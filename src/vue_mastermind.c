@@ -1,6 +1,6 @@
-#include "../inc/vue_mastermind10.h"
+#include "../inc/vue_mastermind.h"
 #include <glib.h>
-int nb = 6;
+int nb = 8;
 /**
 	Initialise une fenêtre gtk.
 	La positionne au milieu de la fenêtre et lui donne comme nom "Le jeu du MasterMind".
@@ -52,13 +52,13 @@ void initialiser_tabBouton(vue_master_t* m)
 		gtk_widget_set_sensitive(m->tabBouton[i], FALSE);
     }
 
-    for(i = 50; i < NB_BOUTONS; i++)
+    for(i = 40; i < NB_BOUTONS; i++)
     {
         gtk_widget_set_sensitive(m->tabBouton[i], FALSE);
         gtk_button_set_label(GTK_BUTTON(m->tabBouton[i]), "?");
         
     }
-	gtk_button_set_label(GTK_BUTTON(m->tabBouton[54]), "The Secret Code");
+	gtk_button_set_label(GTK_BUTTON(m->tabBouton[44]), "The Secret Code");
 }
 
 /**
@@ -410,7 +410,7 @@ void afficher_combi_gagnant(vue_master_t* m)
     {
         c = mastermind_get_secret(&m->mastermind, i);
         m->couleur = c;
-        modifier_bouton(m->tabBouton[49 + i], m);
+        modifier_bouton(m->tabBouton[39 + i], m);
     }
 }
 
@@ -490,7 +490,7 @@ void quitter_partie(GtkWidget* menu, vue_master_t* m)
     switch(gtk_dialog_run(GTK_DIALOG(question)))
     {
         case GTK_RESPONSE_YES:
-            gtk_main_quit();
+            gtk_widget_destroy(m->window);
         break;
         case GTK_RESPONSE_NONE:
         case GTK_RESPONSE_NO:
@@ -522,19 +522,19 @@ void refresh(vue_master_t* m)
     {
         gtk_button_set_image(GTK_BUTTON(m->tabBouton[i]), NULL);
         gtk_button_set_label(GTK_BUTTON(m->tabBouton[i]), "");
-        if(i < 55)
+        if(i < 45)
             gtk_widget_set_sensitive(m->tabBouton[i], TRUE);
     }
 
     for(i = 4; i < NB_BOUTONS; i+=5)
         gtk_widget_set_sensitive(m->tabBouton[i], FALSE);
-    for(i = 50; i < NB_BOUTONS; i++)
+    for(i = 40; i < NB_BOUTONS; i++)
     {
         gtk_widget_set_sensitive(m->tabBouton[i], FALSE);
         gtk_button_set_label(GTK_BUTTON(m->tabBouton[i]), "?");
         
     }
-    for(i = 50; i < NB_BOUTONS - 1; i++)
+    for(i = 40; i < NB_BOUTONS - 1; i++)
         gtk_button_set_label(GTK_BUTTON(m->tabBouton[i]), "?");
-    gtk_button_set_label(GTK_BUTTON(m->tabBouton[54]), "The Secret Code");
+    gtk_button_set_label(GTK_BUTTON(m->tabBouton[44]), "The Secret Code");
 }
