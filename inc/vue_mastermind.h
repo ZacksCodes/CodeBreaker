@@ -62,7 +62,7 @@ void modifier_bouton(GtkWidget* b, vue_master_t* m);
 void confirmer(GtkWidget* b, vue_master_t* m);
 void activer_confirmer_if(GtkWidget* b, vue_master_t *m);
 void afficher_combi_gagnant(vue_master_t* m);
-void vue_mastermind(vue_master_t* m);
+void vue_mastermind(vue_master_t* m, int choice);
 void replay_joueur(GtkWidget* b, vue_master_t* m);
 void afficher_fin(GtkWidget* b, vue_master_t* m);
 void desactiver_tab_bouton(vue_master_t* m, int n);

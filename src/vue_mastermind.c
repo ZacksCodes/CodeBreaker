@@ -1,6 +1,7 @@
 #include "../inc/vue_mastermind.h"
 #include <glib.h>
-int nb = 8;
+int nb;
+int tab;
 /**
 	Initialise une fenêtre gtk.
 	La positionne au milieu de la fenêtre et lui donne comme nom "Le jeu du MasterMind".
@@ -52,13 +53,13 @@ void initialiser_tabBouton(vue_master_t* m)
 		gtk_widget_set_sensitive(m->tabBouton[i], FALSE);
     }
 
-    for(i = 40; i < NB_BOUTONS; i++)
+    for(i = tab; i < NB_BOUTONS; i++)
     {
         gtk_widget_set_sensitive(m->tabBouton[i], FALSE);
         gtk_button_set_label(GTK_BUTTON(m->tabBouton[i]), "?");
         
     }
-	gtk_button_set_label(GTK_BUTTON(m->tabBouton[44]), "The Secret Code");
+	gtk_button_set_label(GTK_BUTTON(m->tabBouton[tab+4]), "The Secret Code");
 }
 
 /**
@@ -170,7 +171,9 @@ void initialiser_ensemble(vue_master_t* m)
 void initialiser_modele(vue_master_t* m)
 {
     srand(time(NULL));
+    g_printf("\nnb : %d\n",nb);
     mastermind_initialiser_avec_secret(&m->mastermind, nb);
+
 }
 
 
@@ -181,10 +184,23 @@ void initialiser_modele(vue_master_t* m)
 	Si on click sur un des boutons, on appelle les fonctions callback déclarées et définies au préalable.
 	@param *m un pointeur sur une structure
  */
-void vue_mastermind(vue_master_t* m)
+void vue_mastermind(vue_master_t* m, int choice)
 {
     int i;
-
+    if(choice == 1)
+    {
+        tab = 60;
+        nb = 4;
+        g_print("tab : %d - nb : %d\n",tab,nb);
+    }else if (choice == 2)
+    {
+        tab = 50;
+        nb = 6;
+    }else if (choice == 3)
+    {
+        tab = 40;
+        nb = 8;
+    }
     initialiser_ensemble(m);
     initialiser_modele(m);
     /* dès qu'on click sur un bouton, on le modifie et on active confirmer si besoin. */
@@ -233,8 +249,10 @@ void modifier_bouton(GtkWidget* b, vue_master_t* m)
             }
             /* la cle est la case ou l'on veut stocker l'information (modèle). Donc pareil on calcule. */
             cle = ((i - 1*decal) % 4) + 1;
-            switch(m->couleur)
+            if(nb == 8)
             {
+                switch(m->couleur)
+                {
                 case COULEUR_INDETERMINEE:
                     m->couleur = COULEUR_ROUGE;
                 break;
@@ -300,8 +318,102 @@ void modifier_bouton(GtkWidget* b, vue_master_t* m)
                     mastermind_set_essai_encours(&m->mastermind, cle, COULEUR_NOIR);
                     m->couleur = COULEUR_ROUGE;
                 break;
-            }
+                }
+            }else if (nb == 6)
+            {
+                switch(m->couleur)
+                {
+                case COULEUR_INDETERMINEE:
+                    m->couleur = COULEUR_ROUGE;
+                break;
+                case COULEUR_ROUGE:
+                    image = gtk_image_new_from_file("Colors/Red.png");
+                    gtk_button_set_label(GTK_BUTTON(b), "Red 1 ");
+                    gtk_button_set_image(GTK_BUTTON(b), image);
+                    mastermind_set_essai_encours(&m->mastermind, cle, COULEUR_ROUGE);
+                    m->couleur = COULEUR_VERT;
+                break;
 
+                case COULEUR_VERT:
+                    STOCKER_IMAGE("Colors/Green.png");
+                    SET_LABEL("Green 2 ");
+                    SET_IMAGE;
+                    mastermind_set_essai_encours(&m->mastermind, cle, COULEUR_VERT);
+                    m->couleur = COULEUR_BLEU;
+                break;
+
+                case COULEUR_BLEU:
+                    STOCKER_IMAGE("Colors/Blue.png");
+                    SET_LABEL("Blue 3 ");
+                    SET_IMAGE;
+                    mastermind_set_essai_encours(&m->mastermind, cle, COULEUR_BLEU);
+                    m->couleur = COULEUR_MAUVE;
+                break;
+
+                case COULEUR_MAUVE:
+                    STOCKER_IMAGE("Colors/Violet.png");
+                    SET_LABEL("Violet 4 ");
+                    SET_IMAGE;
+                    mastermind_set_essai_encours(&m->mastermind, cle, COULEUR_MAUVE);
+                    m->couleur = COULEUR_ORANGE;
+                break;
+
+                case COULEUR_ORANGE:
+                    STOCKER_IMAGE("Colors/Orange.png");
+                    SET_LABEL("Orange 5 ");
+                    SET_IMAGE;
+                    mastermind_set_essai_encours(&m->mastermind, cle, COULEUR_ORANGE);
+                    m->couleur = COULEUR_JAUNE;
+                break;
+
+                case COULEUR_JAUNE:
+                    STOCKER_IMAGE("Colors/Yellow.png");
+                    SET_LABEL("Yellow 6 ");
+                    SET_IMAGE;
+                        mastermind_set_essai_encours(&m->mastermind, cle, COULEUR_JAUNE);
+                    m->couleur = COULEUR_ROUGE;
+                break;
+                }
+            }else if (nb == 4)
+            {
+                switch(m->couleur)
+                {
+                case COULEUR_INDETERMINEE:
+                    m->couleur = COULEUR_ROUGE;
+                break;
+                case COULEUR_ROUGE:
+                    image = gtk_image_new_from_file("Colors/Red.png");
+                    gtk_button_set_label(GTK_BUTTON(b), "Red 1 ");
+                    gtk_button_set_image(GTK_BUTTON(b), image);
+                    mastermind_set_essai_encours(&m->mastermind, cle, COULEUR_ROUGE);
+                    m->couleur = COULEUR_VERT;
+                break;
+
+                case COULEUR_VERT:
+                    STOCKER_IMAGE("Colors/Green.png");
+                    SET_LABEL("Green 2 ");
+                    SET_IMAGE;
+                    mastermind_set_essai_encours(&m->mastermind, cle, COULEUR_VERT);
+                    m->couleur = COULEUR_BLEU;
+                break;
+
+                case COULEUR_BLEU:
+                    STOCKER_IMAGE("Colors/Blue.png");
+                    SET_LABEL("Blue 3 ");
+                    SET_IMAGE;
+                    mastermind_set_essai_encours(&m->mastermind, cle, COULEUR_BLEU);
+                    m->couleur = COULEUR_MAUVE;
+                break;
+
+                case COULEUR_MAUVE:
+                    STOCKER_IMAGE("Colors/Violet.png");
+                    SET_LABEL("Violet 4 ");
+                    SET_IMAGE;
+                    mastermind_set_essai_encours(&m->mastermind, cle, COULEUR_MAUVE);
+                    m->couleur = COULEUR_ROUGE;
+                break;
+                }
+            }
         }
     }
 }
@@ -410,7 +522,7 @@ void afficher_combi_gagnant(vue_master_t* m)
     {
         c = mastermind_get_secret(&m->mastermind, i);
         m->couleur = c;
-        modifier_bouton(m->tabBouton[39 + i], m);
+        modifier_bouton(m->tabBouton[(tab-1) + i], m);
     }
 }
 
@@ -522,19 +634,19 @@ void refresh(vue_master_t* m)
     {
         gtk_button_set_image(GTK_BUTTON(m->tabBouton[i]), NULL);
         gtk_button_set_label(GTK_BUTTON(m->tabBouton[i]), "");
-        if(i < 45)
+        if(i < (tab+5))
             gtk_widget_set_sensitive(m->tabBouton[i], TRUE);
     }
 
     for(i = 4; i < NB_BOUTONS; i+=5)
         gtk_widget_set_sensitive(m->tabBouton[i], FALSE);
-    for(i = 40; i < NB_BOUTONS; i++)
+    for(i = tab; i < NB_BOUTONS; i++)
     {
         gtk_widget_set_sensitive(m->tabBouton[i], FALSE);
         gtk_button_set_label(GTK_BUTTON(m->tabBouton[i]), "?");
         
     }
-    for(i = 40; i < NB_BOUTONS - 1; i++)
+    for(i = tab; i < NB_BOUTONS - 1; i++)
         gtk_button_set_label(GTK_BUTTON(m->tabBouton[i]), "?");
-    gtk_button_set_label(GTK_BUTTON(m->tabBouton[44]), "The Secret Code");
+    gtk_button_set_label(GTK_BUTTON(m->tabBouton[tab+4]), "The Secret Code");
 }

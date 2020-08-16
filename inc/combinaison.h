@@ -1,50 +1,6 @@
-/* Combinaison de couleurs pour le jeu de Mastermind : fichier d'entête
-
-	Dans le jeu de mastermind, une combinaison (ou code) est un mot de longueur 4 sur un alphabet composé de 8 couleurs.
-	Une combinaison revient donc à associer pour chaque clé 1, 2, 3, 4 une couleur parmi ces 8 couleurs.
-
-	________________________ Sont définis / déclarées ici :
-	Les constantes symboliques:
-		#define NB_COULEURS 8
-		#define TAILLE_COMBI 4
-		#define COULEUR_MIN (COULEUR_INDETERMINEE +1)
-		#define COULEUR_MAX (COULEUR_INDETERMINEE +NB_COULEURS)
-
-	Les types :
-		typedef enum e_couleur couleur ;
-		typedef couleur[TAILLE_COMBI] combinaison;
-
-	Les fonctions de manipulation :
-		Initialisation :
-			- void combinaison_initialiser(combinaison c);
-			- void combinaison_tirer_au_hasard(combinaison c);
-		Accesseurs en lecture / écriture :
-			- void combinaison_set_couleur(combinaison c, int cle, couleur val);
-			- couleur combinaison_get_couleur(combinaison c, int cle);
-		Accesseurs en lecture avancés :
-			- int combinaison_est_valide(combinaison c);
-			- int combinaison_cmp_ordonnee(combinaison c_source, combinaison c_cible);
-			- int combinaison_cmp_ensembliste(combinaison c_source, combinaison c_cible);
-*/
-
 #ifndef COMBINAISON_H
 
 #define COMBINAISON_H
-
-/*	______________________________________
-	Structure de donnees					*/
-
-/* ____ Couleur :
-	- Un nombre 8 de couleurs 
-		=> une constante symbolique NB_COULEURS représentant ce nombre
-	- Couleurs disponibles rouge, bleu, vert, mauve, orange, jaune, blanc, noir
-		=> huit constantes symboliques (une par couleur), 
-			+ une constante symbolique permettant de représenter le fait que la couleur d'une composante d'une combinaison n'est pas encore définie
-		=> un type énuméré e_couleur dans le quel les huit couleurs du jeu sont successives
-	- Pour éviter les problèmes si l'on change le nombre ou l'ordre des constantes symboliques représentant les couleurs du jeu :
-		-> deux constantes symboliques COULEUR_MIN et COULEUR_MAX représentant le plus petit et le plus grand code d'une "vraie" couleur du jeu 
-*/
-
 
 enum e_couleur {
 	COULEUR_INDETERMINEE = 0,
@@ -62,13 +18,6 @@ enum e_couleur {
 
 
 typedef enum e_couleur couleur ;
-
-/* ____ Combinaison secrete :
-	- Taille 4 d'une combinaison
-		=> une constante symbolique TAILLE_COMBI représentant la taille des combinaisons manipulées par le jeu
-	- Combinaisons qui sont des combinaisons de couleurs
-		=> une combinaison peut être représentée par un tableau de TAILLE_COMBI couleurs
-*/
 
 #define TAILLE_COMBI 4
 

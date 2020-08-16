@@ -28,13 +28,15 @@ void combinaison_initialiser(combinaison c)
 */
 void combinaison_tirer_au_hasard(combinaison c, int nb)
 {
-	int i;
+	int i, temp[8] = {0,0,0,0,0,0,0,0};
 	nb_max = nb + COULEUR_INDETERMINEE;
     /* tirage au hasard de chaque composante de la combinaison */
     for (i = 0 ; i < TAILLE_COMBI ; i ++)
 	{
         c[i] = (rand() % nb_max) + COULEUR_MIN;
-		
+		while(temp[c[i]-1] == 1)
+			c[i] = (rand() % nb_max) + COULEUR_MIN;
+		temp[c[i]-1] = 1;
 		g_print("%d ", c[i]);
 	}
 }

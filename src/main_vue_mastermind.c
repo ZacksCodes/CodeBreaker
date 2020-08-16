@@ -72,7 +72,7 @@ void submit(GtkWidget* button, gpointer window)
     g_print("Selected Radio : %d\n",selectedRadio);
     gtk_widget_destroy(window);
     
-    vue_mastermind(&master);
+    vue_mastermind(&master, selectedRadio);
     GtkSettings* default_settings = gtk_settings_get_default();
 	g_object_set(default_settings, "gtk-button-images", TRUE, NULL);
     gtk_widget_show_all(master.window);
